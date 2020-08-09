@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!-- ********** HMVC Structure **********  --> 
+<Application>
+    <feature continue='1'>
+        <controllers nest='1'/>
+        <Models nest='1'/>
+        <entities nest='1'/>
+        <views nest='1'/>
+    </feature>
+</Application>

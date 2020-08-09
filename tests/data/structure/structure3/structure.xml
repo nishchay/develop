@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!-- **********  Controller and model hirarchy  **********  --> 
+<Application>
+    <feature continue='1'>
+        <controllers/>
+        <views/>
+    </feature>
+    <Models>
+        <feature continue='1'/>
+    </Models>
+    <entities/>
+</Application>

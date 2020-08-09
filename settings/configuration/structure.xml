@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!-- ********** Our recommedation  **********  --> 
+<Application>
+    <Controllers nest='1' require='1'>
+        <!-- Routes which should be accessed directly. -->
+        <Direct/>
+        <!-- Routes which requires login into application. -->
+        <Secure/>
+        <!-- All routes which are services. -->
+        <Service/>
+    </Controllers>
+    <Entities nest='1'/>
+    <Models type='model' nest='1'/>
+    <views require='1' nest='1'/>
+    <Events/>
+    <!-- Exception handlers -->
+    <Handler/>
+    <!-- Form classes -->
+    <Forms type='form'/>
+    <!-- Various feature implementations -->
+    <Features type='feature'/>
+</Application>
+<!-- ********** Basic Structure  **********  --> 
+<!--<Application>
+    <Controllers require='1' root='1'/>
+    <Entities nest='1' />
+    <Models nest='1' />
+    <views require='1' nest='1'/>
+</Application>-->

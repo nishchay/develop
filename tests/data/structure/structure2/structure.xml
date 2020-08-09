@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!-- ********** Inner Hirarchy Structure **********  -->
+<Application>
+    <controllers>
+        <feature continue='1'/>
+    </controllers>
+    <Models>
+        <feature continue='1'/>
+    </Models>
+    <views>
+        <feature continue='1'/>
+    </views>
+    <entities>
+        <feature continue='1'/>
+    </entities>
+</Application>

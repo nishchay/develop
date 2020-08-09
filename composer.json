@@ -1,0 +1,20 @@
+{
+    "name": "nishchay/develop",
+    "description": "Nishchay - PHP framework developer build",
+    "keywords": ["php-framework", "open-structure", "Nishchay"],
+    "license": "BSD-3-Clause",
+    "type": "project",
+    "require": {
+        "nishchay/framework": "*@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "": ""
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "Installer::install"
+        ]
+    }
+}
