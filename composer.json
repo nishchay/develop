@@ -12,6 +12,7 @@
             "": ""
         }
     },
+    "minimum-stability": "dev",
     "scripts": {
         "post-root-package-install": [
             "Installer::install"
