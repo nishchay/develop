@@ -85,7 +85,7 @@ class EntityTest extends TestCase
      * This will insert record into table and it also tests all data type for
      * insert.
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
 
         for ($i = 1; $i <= 5; $i++) {
@@ -129,10 +129,10 @@ class EntityTest extends TestCase
     {
         $record = $this->entityManager->get(self::$data['userId']);
 
-        $this->assertInternalType('int', $record->userId);
+        $this->assertIsInt($record->userId);
         $this->assertEquals(self::$data['userId'], $record->userId);
 
-        $this->assertInternalType('string', $record->firstName);
+        $this->assertIsString($record->firstName);
         $this->assertEquals(self::$data['firstName'], $record->firstName);
 
         $this->assertTrue($record->birthDate instanceof DateTime);
@@ -141,16 +141,16 @@ class EntityTest extends TestCase
         $this->assertTrue($record->createdAt instanceof DateTime);
         $this->assertEquals(self::$data['createdAt']->format(DateUtility::MYSQL_DATETIME_FORMAT), $record->createdAt->format(DateUtility::MYSQL_DATETIME_FORMAT));
 
-        $this->assertInternalType('int', $record->intType);
+        $this->assertIsInt($record->intType);
         $this->assertEquals(self::$data['intType'], $record->intType);
 
-        $this->assertInternalType('float', $record->floatType);
+        $this->assertIsFloat($record->floatType);
         $this->assertEquals(self::$data['floatType'], $record->floatType);
 
-        $this->assertInternalType('double', $record->floatType);
+        $this->assertIsFloat($record->floatType);
         $this->assertEquals(self::$data['doubleType'], $record->doubleType);
 
-        $this->assertInternalType('boolean', $record->booleanType);
+        $this->assertIsBool($record->booleanType);
         $this->assertEquals(self::$data['booleanType'], $record->booleanType);
 
         return $record;
@@ -175,7 +175,7 @@ class EntityTest extends TestCase
         self::$data['firstName'] = $record->firstName = 'New name';
         $success = $record->save();
 
-        $this->assertInternalType('int', $success);
+        $this->assertIsInt($success);
         $this->assertEquals(1, $success);
 
         $afterUpdate = $this->entityManager->get(self::$data['userId']);
@@ -195,7 +195,7 @@ class EntityTest extends TestCase
         self::$data['birthDate'] = $record->birthDate->modify('+1 day');
         $success = $record->save();
 
-        $this->assertInternalType('int', $success);
+        $this->assertIsInt($success);
         $this->assertEquals(1, $success);
 
         $afterUpdate = $this->entityManager->get(self::$data['userId']);
@@ -215,7 +215,7 @@ class EntityTest extends TestCase
         self::$data['createdAt'] = $record->createdAt->modify('+1 day');
         $success = $record->save();
 
-        $this->assertInternalType('int', $success);
+        $this->assertIsInt($success);
         $this->assertEquals(1, $success);
 
         $afterUpdate = $this->entityManager->get(self::$data['userId']);
@@ -364,7 +364,7 @@ class EntityTest extends TestCase
                 ->enableDerived(true)
                 ->get(self::$data['userId']);
 
-        $this->assertInternalType('array', $record->relatives);
+        $this->assertIsArray($record->relatives);
         foreach ($record->relatives as $index => $relative) {
             $this->assertTrue($relative instanceof EntityManager);
             $this->assertEquals($relative->userId, self::$data['userId']);
@@ -452,9 +452,8 @@ class EntityTest extends TestCase
      */
     public function testExtraProperty()
     {
-        $record = $this->getRelativeEntityManager()
-                ->enableLazy(true)
-                ->get(self::$relativeId);
+        $record = $this->entityManager
+                ->get(self::$data['userId']);
 
         $extra = new ExtraProperty('extra');
         $extra->setDataType('int')
@@ -466,13 +465,12 @@ class EntityTest extends TestCase
         $record->extra = 123;
         $record->save();
 
-        $updated = $this->getRelativeEntityManager()
-                ->enableLazy(true)
-                ->get(self::$relativeId);
+        $updated = $this->entityManager
+                ->get(self::$data['userId']);
 
         $this->assertTrue($updated->isExtraPropertyExists('extra'));
 
-        $this->assertInternalType('int', $updated->extra);
+        $this->assertIsInt($updated->extra);
         $this->assertEquals(123, $updated->extra);
 
         return $updated;
@@ -488,12 +486,11 @@ class EntityTest extends TestCase
         $record->extra = 251;
         $record->save();
 
-        $updated = $this->getRelativeEntityManager()
-                ->enableLazy(true)
-                ->get(self::$relativeId);
+        $updated = $this->entityManager
+                ->get(self::$data['userId']);
         $this->assertTrue($updated->isExtraPropertyExists('extra'));
 
-        $this->assertInternalType('int', $updated->extra);
+        $this->assertIsInt($updated->extra);
         $this->assertEquals(251, $updated->extra);
 
         return $updated;
@@ -551,9 +548,8 @@ class EntityTest extends TestCase
 
         $record->save();
 
-        $updated = $this->getRelativeEntityManager()
-                ->enableLazy(true)
-                ->get(self::$relativeId);
+        $updated = $this->entityManager
+                ->get(self::$data['userId']);
 
         $this->assertFalse($updated->isExtraPropertyExists('extra'));
     }
@@ -572,7 +568,7 @@ class EntityTest extends TestCase
 
         new EntityManager(TestEntityStaticProperty::class);
 
-        $this->assertInternalType('int', TestEntityStaticProperty::$staticProperty);
+        $this->assertIsInt(TestEntityStaticProperty::$staticProperty);
 
         $this->assertEquals(123, TestEntityStaticProperty::$staticProperty);
     }
@@ -612,7 +608,7 @@ class EntityTest extends TestCase
     /**
      * Truncating all tests tables.
      */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         $query = new Query();
         (new Query)->execute('TRUNCATE TABLE ' . $query->quote(TestRelativeExtendedEntity::TABLE));

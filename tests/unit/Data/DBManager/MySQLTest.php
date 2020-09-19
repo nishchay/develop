@@ -340,7 +340,7 @@ class MySQLTest extends TestCase
     /**
      * Removing all tests tables.
      */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         $query = self::getQuery();
         $query->execute('DROP TABLE IF EXISTS ' . $query->quote(self::$childTable));

@@ -26,11 +26,11 @@ class StructureTest extends TestCase
         $rowPath = $path;
         foreach ($directory as $name => $subDirectory) {
             if (is_string($name) === false) {
-                $this->assertInternalType('array', $structure->isValidFile($path . DS . $subDirectory));
+                $this->assertIsArray($structure->isValidFile($path . DS . $subDirectory));
             }
 
             if (is_array($subDirectory)) {
-                $this->assertInternalType('string', $structure->isValidDirectory($path . DS . $name));
+                $this->assertIsString($structure->isValidDirectory($path . DS . $name));
                 $this->processApp($path . DS . $name, $subDirectory, $structure);
             }
         }

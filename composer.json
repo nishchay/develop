@@ -5,7 +5,8 @@
     "license": "BSD-3-Clause",
     "type": "project",
     "require": {
-        "nishchay/framework": "*@dev"
+        "nishchay/framework": "*@dev",
+        "phpunit/phpunit": "8.5.x-dev"
     },
     "autoload": {
         "psr-4": {
